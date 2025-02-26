@@ -148,22 +148,22 @@ app.post("/newdoc", verifyToken, async (req, res) => {
   }
 });
 
-app.post("/backend-api-to-save-text", async (req, res) => {
-  try {
-    console.log("passed");
-    const data = req.body;
+// app.post("/backend-api-to-save-text", async (req, res) => {
+//   try {
+//     console.log("passed");
+//     const data = req.body;
     
-    // Send an immediate response
-    res.status(200).json({ message: "Request received, processing in background" });
+//     // Send an immediate response
+//     res.status(200).json({ message: "Request received, processing in background" });
 
-    // Run long operations asynchronously
-    await someLongRunningFunction(data);
+//     // Run long operations asynchronously
+//     await someLongRunningFunction(data);
     
-    console.log("Processing completed:", data);
-  } catch (err) {
-    console.error(err);
-  }
-});
+//     console.log("Processing completed:", data);
+//   } catch (err) {
+//     console.error(err);
+//   }
+// });
 
 app.get("/text-editor/:id", verifyToken, async (req, res) => {
     try{

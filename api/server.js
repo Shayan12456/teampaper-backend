@@ -5,8 +5,8 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const cookieParser = require("cookie-parser");
 const app = express();
-const User = require('./models/userModel');
-const Document = require('./models/documentModel');
+const User = require('../models/userModel');
+const Document = require('../models/documentModel');
 const jwt = require("jsonwebtoken");//For creating and verifying JSON Web Tokens.
 env.config();
 

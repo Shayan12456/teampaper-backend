@@ -336,7 +336,12 @@ app.post("/login", async (req, res) => {
 });
 
 app.post("/logout", (req, res) => {
-  res.clearCookie("accessToken");
+  res.clearCookie("accessToken", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production", // ✅ Required for HTTPS (Vercel)
+    sameSite: "none", // ✅ Required for cross-origin cookies
+  });
+
   res.json({ message: "Logged out successfully" });
 });
 

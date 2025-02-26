@@ -149,26 +149,19 @@ app.post("/newdoc", verifyToken, async (req, res) => {
 });
 
 app.post("/backend-api-to-save-text", async (req, res) => {
-  try{
+  try {
     console.log("passed");
     const data = req.body;
-    // const existingUser = await User.findOne({ email: req.email });
     
-    // if(!existingUser) {
-    //   return res.status(401).json({ error: "User not found" });
-    // }
-  
-    // const newDoc = new Document({ title: data.title, content: data.content, owner: data.owner });
-    // await newDoc.save();
-  
-    // existingUser.documents.push(newDoc._id);
-    // await existingUser.save();
+    // Send an immediate response
+    res.status(200).json({ message: "Request received, processing in background" });
 
-    console.log(data)
-
-    // res.status(200).json({ message: "Document created", newDoc });
-  }catch(err){
-    console.log(err);
+    // Run long operations asynchronously
+    await someLongRunningFunction(data);
+    
+    console.log("Processing completed:", data);
+  } catch (err) {
+    console.error(err);
   }
 });
 

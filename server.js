@@ -115,9 +115,15 @@ app.post("/login", async (req, res) => {
 
 // Logout route to clear the cookie
 app.post("/logout", (req, res) => {
-  res.clearCookie("accessToken"); // Clear the token cookie
+  res.clearCookie("accessToken", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production", // ✅ Required for HTTPS (Vercel)
+    sameSite: "none", // ✅ Required for cross-origin cookies
+  });
+
   res.json({ message: "Logged out successfully" });
 });
+
 
 app.get("/document", verifyToken, async (req, res)=>{
   console.log(req.email)

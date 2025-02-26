@@ -297,8 +297,8 @@ app.post("/signup", async (req, res) => {
       .status(200)
       .cookie("accessToken", token, {
         httpOnly: true,
-        secure: false,
-        sameSite: "strict",
+        secure: true,
+        sameSite: "none",
         maxAge: 60 * 60 * 1000, // 1 hour
       })
       .json({ message: "Signed Up successfully" });
@@ -324,8 +324,8 @@ app.post("/login", async (req, res) => {
       .status(200)
       .cookie("accessToken", token, {
         httpOnly: true,
-        secure: false,
-        sameSite: "strict",
+        secure: true,
+        sameSite: "none",
         maxAge: 60 * 60 * 1000,
       })
       .json({ message: "Logged in successfully" });

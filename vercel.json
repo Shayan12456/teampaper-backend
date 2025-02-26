@@ -6,5 +6,5 @@
         "maxDuration": 60,
      }
   },
-  "routes": [{"handle": "filesystem"}, {"src": "/(.*)", "dest": "/server.js" }]
+  "routes":  [{"src": "/(.*)", "dest": "/server.js" }]
 }

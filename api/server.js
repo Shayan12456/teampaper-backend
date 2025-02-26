@@ -223,12 +223,36 @@ const SECRET_KEY = process.env.SECRET_KEY;
 
 // ✅ Middlewares
 app.use(express.json());
+// app.use(
+//   cors({
+//     origin: process.env.FRONTEND || "*", // Allow frontend requests
+//     credentials: true, // Allow cookies
+//   })
+// );
+// ✅ Middleware to Handle CORS
 app.use(
   cors({
-    origin: process.env.FRONTEND || "*", // Allow frontend requests
-    credentials: true, // Allow cookies
+    origin: process.env.FRONTEND || "*", // Allow frontend domain
+    credentials: true, // Allow cookies and headers
+    methods: "GET,POST,PUT,DELETE,OPTIONS", // Allow these methods
+    allowedHeaders: "Content-Type, Authorization", // Allow custom headers
   })
 );
+
+// ✅ Set CORS Headers in Every Response (Extra Protection)
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", process.env.FRONTEND || "*");
+  res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.header("Access-Control-Allow-Credentials", "true"); // Allow cookies
+
+  // Handle CORS Preflight Requests
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(204); // No Content
+  }
+  next();
+});
+
 app.use(cookieParser()); // ✅ Parse cookies
 
 // ✅ Database Connection with Error Handling

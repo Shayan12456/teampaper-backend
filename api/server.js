@@ -255,17 +255,9 @@ app.use((req, res, next) => {
 
 app.use(cookieParser()); // ✅ Parse cookies
 
-// ✅ Database Connection with Error Handling
-mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("✅ Connected to MongoDB"))
-  .catch((err) => {
-    console.error("❌ MongoDB Connection Error:", err);
-    process.exit(1); // Exit if DB connection fails
-  });
+mongoose.connect(process.env.MONGO_URI).then(()=>{
+    console.log("connected to database")
+});
 
 // ✅ Token Verification Middleware
 const verifyToken = (req, res, next) => {
